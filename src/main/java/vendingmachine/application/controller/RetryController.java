@@ -15,4 +15,8 @@ public abstract class RetryController {
     protected final <T> T retrying(Supplier<T> supplier) {
         return RetryHandler.execute(supplier, outputView::printErrorMessage);
     }
+
+    protected final void retrying(Runnable runnable) {
+        RetryHandler.execute(runnable, outputView::printErrorMessage);
+    }
 }

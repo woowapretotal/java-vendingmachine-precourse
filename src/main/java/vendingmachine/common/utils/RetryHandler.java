@@ -17,4 +17,15 @@ public final class RetryHandler {
             }
         }
     }
+
+    public static void execute(Runnable runnable, Consumer<String> onError) {
+        while (true) {
+            try {
+                runnable.run();
+                return;
+            } catch (Exception e) {
+                onError.accept(e.getMessage());
+            }
+        }
+    }
 }
