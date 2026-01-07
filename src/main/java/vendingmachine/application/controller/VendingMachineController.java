@@ -32,16 +32,23 @@ public class VendingMachineController extends RetryController {
         });
     }
 
-    public void purchaseProduct() {
+    public void purchaseProductWithRetrying() {
         try {
+            purchaseProduct();
+        } catch (PurchasablePolicyException e) {
+            CoinChunksResponse coinChunksResponse = vendingMachineService.refundCustomerAmount();
+            outputView.printRefund(coinChunksResponse);
+        }
+    }
+
+    private void purchaseProduct() {
+        while (true) {
             retrying(() -> {
                 outputView.printCustomerAmount(vendingMachineService.findCustomerAmount());
+                vendingMachineService.validatePurchasable();
                 String name = inputAdapter.readPurchasedProductName();
                 vendingMachineService.purchaseProductFrom(name);
             });
-        } catch (PurchasablePolicyException e) {
-            
         }
-
     }
 }

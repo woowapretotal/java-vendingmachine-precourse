@@ -1,5 +1,7 @@
 package vendingmachine.domain.balance;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class MachineBalance {
@@ -30,5 +32,32 @@ public class MachineBalance {
 
     public boolean canPurchaseProductCompareWith(final int productPrice) {
         return customerInputAmount < productPrice;
+    }
+
+    public List<CoinChunk> composeRefundedCoinChunks() {
+        List<CoinChunk> sortedCoinChunks = sortCoinChunk();
+
+        List<CoinChunk> coinChunksForRefund = new ArrayList<>();
+        for (CoinChunk coinChunk : sortedCoinChunks) {
+            addRefundCoinChunk(coinChunk, coinChunksForRefund);
+        }
+
+        return coinChunksForRefund;
+    }
+
+    private void addRefundCoinChunk(final CoinChunk coinChunk, final List<CoinChunk> coinChunksForRefund) {
+        if (!coinChunk.isCoinAmountOverThan(customerInputAmount)) {
+            int refundCoinQuantity = coinChunk.calculateMaxRefundsQuantity(customerInputAmount);
+            coinChunksForRefund.add(new CoinChunk(coinChunk.getCoin(), refundCoinQuantity));
+            customerInputAmount -= refundCoinQuantity * coinChunk.getCoinAmount();
+            return;
+        }
+        coinChunksForRefund.add(new CoinChunk(coinChunk.getCoin(), 0));
+    }
+
+    private List<CoinChunk> sortCoinChunk() {
+        return coinChunks.stream()
+                .sorted(Comparator.comparingInt(CoinChunk::getCoinAmount))
+                .toList();
     }
 }

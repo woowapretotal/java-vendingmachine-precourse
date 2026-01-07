@@ -13,7 +13,7 @@ public final class OutputFormatter {
     }
 
     public static String formatErrorMessage(String message) {
-        return GlobalMessage.ERROR_PREFIX + message;
+        return GlobalMessage.ERROR_PREFIX.get() + message;
     }
 
     public static String formatCoinChunks(final CoinChunksResponse coinChunks) {

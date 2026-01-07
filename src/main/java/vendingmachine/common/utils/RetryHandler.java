@@ -23,7 +23,7 @@ public final class RetryHandler {
             try {
                 runnable.run();
                 return;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 onError.accept(e.getMessage());
             }
         }

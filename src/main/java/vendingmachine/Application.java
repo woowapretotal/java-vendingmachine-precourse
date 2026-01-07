@@ -16,6 +16,7 @@ public class Application {
             productController.registerProductsWithRetrying();
 
             vendingMachineController.registerInputAmountWithRetrying();
+            vendingMachineController.purchaseProductWithRetrying();
         } finally {
             Console.close();
         }

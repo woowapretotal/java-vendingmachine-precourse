@@ -30,7 +30,7 @@ public class AppConfig {
     private final VendingMachine vendingMachine = new VendingMachine();
 
     // == application service ==
-    private final VendingMachineService vendingMachineService = new VendingMachineService(coinComposeStrategy, vendingMachine, machineBalanceRepository);
+    private final VendingMachineService vendingMachineService = new VendingMachineService(coinComposeStrategy, vendingMachine, machineBalanceRepository, productRepository);
     private final ProductService productService = new ProductService(productRepository);
 
     // == controller ==

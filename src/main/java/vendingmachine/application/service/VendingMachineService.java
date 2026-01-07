@@ -3,12 +3,15 @@ package vendingmachine.application.service;
 import vendingmachine.application.service.response.CoinChunksResponse;
 import vendingmachine.common.error.ApplicationException;
 import vendingmachine.common.error.ErrorMessage;
+import vendingmachine.domain.balance.CoinChunk;
 import vendingmachine.domain.balance.MachineBalance;
 import vendingmachine.domain.balance.MachineBalanceRepository;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.ProductRepository;
 import vendingmachine.domain.service.VendingMachine;
 import vendingmachine.domain.strategy.CoinComposeStrategy;
+
+import java.util.List;
 
 public class VendingMachineService {
     private final CoinComposeStrategy coinComposeStrategy;
@@ -39,12 +42,20 @@ public class VendingMachineService {
         return machineBalance.getCustomerInputAmount();
     }
 
-    public void purchaseProductFrom(final String productName) {
+    public void validatePurchasable() {
         vendingMachine.validatePurchasable(productRepository.findAll(), findMachineBalance());
+    }
 
+    public void purchaseProductFrom(final String productName) {
         Product product = findProductBy(productName);
         MachineBalance machineBalance = findMachineBalance();
         vendingMachine.purchaseProduct(product, machineBalance);
+    }
+
+    public CoinChunksResponse refundCustomerAmount() {
+        MachineBalance machineBalance = findMachineBalance();
+        List<CoinChunk> coinChunks = machineBalance.composeRefundedCoinChunks();
+        return CoinChunksResponse.from(coinChunks);
     }
 
     private MachineBalance findMachineBalance() {
