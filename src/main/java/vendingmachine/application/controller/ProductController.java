@@ -18,8 +18,10 @@ public class ProductController extends RetryController {
     }
 
     public void registerProductsWithRetrying() {
-        List<ProductRegisterRequest> productRegisterRequests =
-                inputAdapter.readRegisteredProductsRequest();
-        productService.registerProducts(productRegisterRequests);
+        retrying(() -> {
+            List<ProductRegisterRequest> productRegisterRequests =
+                    inputAdapter.readRegisteredProductsRequest();
+            productService.registerProducts(productRegisterRequests);
+        });
     }
 }
