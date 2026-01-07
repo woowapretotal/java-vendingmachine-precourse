@@ -31,4 +31,8 @@ public class Product {
         return stock.isEmpty();
     }
 
+    public void purchaseOne() {
+        stock = stock.withDecreaseQuantity(1);
+    }
+
 }

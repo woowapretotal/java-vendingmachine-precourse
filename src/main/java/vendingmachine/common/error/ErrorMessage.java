@@ -20,6 +20,7 @@ public enum ErrorMessage {
     INSUFFICIENT_STOCK("상품 재고가 충분하지 않습니다."),
     EMPTY_MACHINE_BALANCE("자판기 잔고 정보가 등록되어 있지 않습니다."),
     EMPTY_PRODUCT("구매 가능한 상품이 존재하지 않습니다."),
+    INSUFFICIENT_CUSTOMER_INPUT_AMOUNT("상품을 구매하기 위한 투입 금액이 부족합니다."),
 
     INVALID_MENU_NUMBER("존재하지 않는 메뉴를 선택하셨습니다."),
     EMPTY_SPLITTED_VALUE("비어있는 항목이 존재합니다."),

@@ -1,9 +1,12 @@
 package vendingmachine.application.service;
 
 import vendingmachine.application.service.response.CoinChunksResponse;
+import vendingmachine.common.error.ApplicationException;
 import vendingmachine.common.error.ErrorMessage;
 import vendingmachine.domain.balance.MachineBalance;
 import vendingmachine.domain.balance.MachineBalanceRepository;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.ProductRepository;
 import vendingmachine.domain.service.VendingMachine;
 import vendingmachine.domain.strategy.CoinComposeStrategy;
 
@@ -11,11 +14,13 @@ public class VendingMachineService {
     private final CoinComposeStrategy coinComposeStrategy;
     private final VendingMachine vendingMachine;
     private final MachineBalanceRepository machineBalanceRepository;
+    private final ProductRepository productRepository;
 
-    public VendingMachineService(final CoinComposeStrategy coinComposeStrategy, final VendingMachine vendingMachine, final MachineBalanceRepository machineBalanceRepository) {
+    public VendingMachineService(final CoinComposeStrategy coinComposeStrategy, final VendingMachine vendingMachine, final MachineBalanceRepository machineBalanceRepository, final ProductRepository productRepository) {
         this.coinComposeStrategy = coinComposeStrategy;
         this.vendingMachine = vendingMachine;
         this.machineBalanceRepository = machineBalanceRepository;
+        this.productRepository = productRepository;
     }
 
     public CoinChunksResponse composeCoinQuantityFrom(final int machineAmount) {
@@ -34,8 +39,21 @@ public class VendingMachineService {
         return machineBalance.getCustomerInputAmount();
     }
 
+    public void purchaseProductFrom(final String productName) {
+        vendingMachine.validatePurchasable(productRepository.findAll(), findMachineBalance());
+
+        Product product = findProductBy(productName);
+        MachineBalance machineBalance = findMachineBalance();
+        vendingMachine.purchaseProduct(product, machineBalance);
+    }
+
     private MachineBalance findMachineBalance() {
         return machineBalanceRepository.findMachineBalance()
                 .orElseThrow(() -> new IllegalStateException(ErrorMessage.EMPTY_MACHINE_BALANCE.message()));
+    }
+
+    private Product findProductBy(final String productName) {
+        return productRepository.findByProductName(productName)
+                .orElseThrow(() -> new ApplicationException(ErrorMessage.NOT_EXISTS_PRODUCT));
     }
 }

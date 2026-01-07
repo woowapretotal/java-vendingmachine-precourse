@@ -1,5 +1,6 @@
 package vendingmachine.domain.service;
 
+import vendingmachine.common.error.DomainException;
 import vendingmachine.common.error.ErrorMessage;
 import vendingmachine.common.error.PurchasablePolicyException;
 import vendingmachine.domain.balance.MachineBalance;
@@ -34,4 +35,15 @@ public class VendingMachine {
                 .orElseThrow(() -> new IllegalStateException(ErrorMessage.EMPTY_PRODUCT.message()));
     }
 
+    public void purchaseProduct(final Product product, final MachineBalance machineBalance) {
+        validateCustomerAmountIsSufficient(product, machineBalance);
+        product.purchaseOne();
+        machineBalance.decreaseCustomerAmount(product.getPrice());
+    }
+
+    private void validateCustomerAmountIsSufficient(final Product product, final MachineBalance machineBalance) {
+        if (machineBalance.canPurchaseProductCompareWith(product.getPrice())) {
+            throw new DomainException(ErrorMessage.INSUFFICIENT_CUSTOMER_INPUT_AMOUNT);
+        }
+    }
 }

@@ -4,6 +4,7 @@ import vendingmachine.application.controller.adapter.ConsoleInputAdapter;
 import vendingmachine.application.service.VendingMachineService;
 import vendingmachine.application.service.response.CoinChunksResponse;
 import vendingmachine.application.view.ConsoleOutputView;
+import vendingmachine.common.error.PurchasablePolicyException;
 
 public class VendingMachineController extends RetryController {
     private final VendingMachineService vendingMachineService;
@@ -22,5 +23,25 @@ public class VendingMachineController extends RetryController {
         });
 
         outputView.printVendingMachineCoinQuantity(coinChunksResponse);
+    }
+
+    public void registerInputAmountWithRetrying() {
+        retrying(() -> {
+            int customerInputAmount = inputAdapter.readCustomerInputAmount();
+            vendingMachineService.registerCustomerInputAmount(customerInputAmount);
+        });
+    }
+
+    public void purchaseProduct() {
+        try {
+            retrying(() -> {
+                outputView.printCustomerAmount(vendingMachineService.findCustomerAmount());
+                String name = inputAdapter.readPurchasedProductName();
+                vendingMachineService.purchaseProductFrom(name);
+            });
+        } catch (PurchasablePolicyException e) {
+            
+        }
+
     }
 }
