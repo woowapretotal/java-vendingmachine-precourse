@@ -15,7 +15,7 @@ public class ConsoleOutputView {
 
     public void printVendingMachineCoinQuantity(final CoinChunksResponse coinChunks) {
         System.out.println("자판기가 보유한 동전");
-        System.out.print(OutputFormatter.formatCoinChunks(coinChunks) + GlobalMessage.BLANK_AND_NEW_LINE);
+        System.out.print(OutputFormatter.formatCoinChunks(coinChunks) + GlobalMessage.BLANK_AND_NEW_LINE.get());
     }
 
 }
