@@ -23,4 +23,8 @@ public class MachineBalance {
     public void insertCustomerAmount(final int customerInsertAmount) {
         this.customerInputAmount += customerInsertAmount;
     }
+
+    public boolean canPurchaseProductCompareWith(final int productPrice) {
+        return customerInputAmount < productPrice;
+    }
 }

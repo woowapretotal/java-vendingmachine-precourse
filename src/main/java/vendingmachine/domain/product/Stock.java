@@ -29,6 +29,10 @@ public class Stock {
         return stockQuantity;
     }
 
+    public boolean isEmpty() {
+        return stockQuantity <= 0;
+    }
+
     @Override
     public boolean equals(final Object object) {
         if (object == null || getClass() != object.getClass()) return false;

@@ -11,6 +11,10 @@ public class Product {
         this.stock = new Stock(stockQuantity);
     }
 
+    public boolean isSameName(String other) {
+        return name.equals(new ProductName(other));
+    }
+
     public String getName() {
         return name.value();
     }
@@ -22,4 +26,9 @@ public class Product {
     public int getStockQuantity() {
         return stock.value();
     }
+
+    public boolean isStockEmpty() {
+        return stock.isEmpty();
+    }
+
 }
