@@ -21,4 +21,9 @@ public class ConsoleOutputView {
     public void printCustomerAmount(final int customerAmount) {
         System.out.printf("투입 금액: %d원" + GlobalMessage.LINE_SEPARATOR.get(), customerAmount);
     }
+
+    public void printRefund(final CoinChunksResponse coinChunks) {
+        System.out.println("잔돈");
+        System.out.println(OutputFormatter.formatCoinChunks(coinChunks));
+    }
 }
