@@ -33,4 +33,9 @@ public class ConsoleInputAdapter {
         outputView.printOnboardingMessage("투입 금액을 입력해 주세요.");
         return inputView.readNumber();
     }
+
+    public String readPurchasedProductName() {
+        outputView.printOnboardingMessage("구매할 상품명을 입력해 주세요.");
+        return inputView.readLine();
+    }
 }
