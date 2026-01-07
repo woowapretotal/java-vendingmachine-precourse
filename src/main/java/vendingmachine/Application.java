@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.application.controller.ProductController;
 import vendingmachine.application.controller.VendingMachineController;
 import vendingmachine.config.AppConfig;
 
@@ -9,7 +10,11 @@ public class Application {
         try {
             AppConfig appConfig = new AppConfig();
             VendingMachineController vendingMachineController = appConfig.vendingMachineController();
+            ProductController productController = appConfig.productController();
+
             vendingMachineController.registerMachineAmountWithRetrying();
+            productController.registerProductsWithRetrying();
+            
         } finally {
             Console.close();
         }
