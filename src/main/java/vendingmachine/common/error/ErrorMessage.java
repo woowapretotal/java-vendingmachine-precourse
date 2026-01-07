@@ -17,6 +17,7 @@ public enum ErrorMessage {
     NOT_EXISTS_COIN("존재하지 않는 동전 정보를 조회하였습니다"),
     INVALID_PRODUCT_PRICE_UNIT("상품 금액은 %d 단위여야 합니다."),
     INSUFFICIENT_STOCK("상품 재고가 충분하지 않습니다."),
+    EMPTY_MACHINE_BALANCE("자판기 잔고 정보가 등록되어 있지 않습니다."),
 
     INVALID_MENU_NUMBER("존재하지 않는 메뉴를 선택하셨습니다."),
     EMPTY_SPLITTED_VALUE("비어있는 항목이 존재합니다."),

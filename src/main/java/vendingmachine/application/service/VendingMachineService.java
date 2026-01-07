@@ -1,6 +1,7 @@
 package vendingmachine.application.service;
 
 import vendingmachine.application.service.response.CoinChunksResponse;
+import vendingmachine.common.error.ErrorMessage;
 import vendingmachine.domain.balance.MachineBalance;
 import vendingmachine.domain.balance.MachineBalanceRepository;
 import vendingmachine.domain.service.VendingMachine;
@@ -21,5 +22,20 @@ public class VendingMachineService {
         MachineBalance machineBalance = vendingMachine.initializeVendingMachine(machineAmount, coinComposeStrategy);
         machineBalanceRepository.saveMachineBalance(machineBalance);
         return CoinChunksResponse.from(machineBalance.getCoinChunks());
+    }
+
+    public void registerCustomerInputAmount(final int customerInputAmount) {
+        MachineBalance machineBalance = findMachineBalance();
+        machineBalance.insertCustomerAmount(customerInputAmount);
+    }
+
+    public int findCustomerAmount() {
+        MachineBalance machineBalance = findMachineBalance();
+        return machineBalance.getCustomerInputAmount();
+    }
+
+    private MachineBalance findMachineBalance() {
+        return machineBalanceRepository.findMachineBalance()
+                .orElseThrow(() -> new IllegalStateException(ErrorMessage.EMPTY_MACHINE_BALANCE.message()));
     }
 }

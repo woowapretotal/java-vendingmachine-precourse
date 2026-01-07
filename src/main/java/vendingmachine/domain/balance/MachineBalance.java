@@ -19,4 +19,8 @@ public class MachineBalance {
     public int getCustomerInputAmount() {
         return customerInputAmount;
     }
+
+    public void insertCustomerAmount(final int customerInsertAmount) {
+        this.customerInputAmount += customerInsertAmount;
+    }
 }
