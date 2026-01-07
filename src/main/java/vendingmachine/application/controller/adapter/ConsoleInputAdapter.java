@@ -28,4 +28,9 @@ public class ConsoleInputAdapter {
                 .map(CustomTypeConverter::toProductRegisterRequest)
                 .toList();
     }
+
+    public int readCustomerInputAmount() {
+        outputView.printOnboardingMessage("투입 금액을 입력해 주세요.");
+        return inputView.readNumber();
+    }
 }
