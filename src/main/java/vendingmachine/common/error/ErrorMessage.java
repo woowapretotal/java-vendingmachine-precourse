@@ -14,6 +14,8 @@ public enum ErrorMessage {
     EXCEEDS_MAX_LENGTH("최대 길이 %d를 초과하였습니다."),
     BELOW_MIN_LENGTH("최소 길이 %d 미만입니다."),
 
+    NOT_EXISTS_COIN("존재하지 않는 동전 정보를 조회하였습니다"),
+
     INVALID_MENU_NUMBER("존재하지 않는 메뉴를 선택하셨습니다."),
     EMPTY_CSV_VALUE("비어있는 항목이 존재합니다.");
 
