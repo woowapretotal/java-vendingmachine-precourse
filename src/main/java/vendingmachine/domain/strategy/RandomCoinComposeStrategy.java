@@ -1,8 +1,8 @@
 package vendingmachine.domain.strategy;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.CoinChunk;
+import vendingmachine.domain.balance.Coin;
+import vendingmachine.domain.balance.CoinChunk;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,7 +1,7 @@
 package vendingmachine.infra;
 
-import vendingmachine.domain.MachineBalance;
-import vendingmachine.domain.MachineBalanceRepository;
+import vendingmachine.domain.balance.MachineBalance;
+import vendingmachine.domain.balance.MachineBalanceRepository;
 
 public class InMemoryMachineBalanceRepository implements MachineBalanceRepository {
     private MachineBalance machineBalance;

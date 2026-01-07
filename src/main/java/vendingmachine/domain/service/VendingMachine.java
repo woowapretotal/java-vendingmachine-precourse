@@ -1,6 +1,6 @@
 package vendingmachine.domain.service;
 
-import vendingmachine.domain.MachineBalance;
+import vendingmachine.domain.balance.MachineBalance;
 import vendingmachine.domain.strategy.CoinComposeStrategy;
 
 public class VendingMachine {

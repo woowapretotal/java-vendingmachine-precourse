@@ -3,7 +3,7 @@ package vendingmachine.domain.strategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import vendingmachine.domain.CoinChunk;
+import vendingmachine.domain.balance.CoinChunk;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package vendingmachine.application.service;
 
 import vendingmachine.application.service.response.CoinChunksResponse;
-import vendingmachine.domain.MachineBalance;
-import vendingmachine.domain.MachineBalanceRepository;
+import vendingmachine.domain.balance.MachineBalance;
+import vendingmachine.domain.balance.MachineBalanceRepository;
 import vendingmachine.domain.service.VendingMachine;
 import vendingmachine.domain.strategy.CoinComposeStrategy;
 

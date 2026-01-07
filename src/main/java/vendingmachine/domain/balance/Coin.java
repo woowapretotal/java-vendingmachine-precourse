@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.balance;
 
 import vendingmachine.common.error.ErrorMessage;
 

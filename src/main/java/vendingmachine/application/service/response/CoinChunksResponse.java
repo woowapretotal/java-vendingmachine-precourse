@@ -1,6 +1,6 @@
 package vendingmachine.application.service.response;
 
-import vendingmachine.domain.CoinChunk;
+import vendingmachine.domain.balance.CoinChunk;
 
 import java.util.List;
 

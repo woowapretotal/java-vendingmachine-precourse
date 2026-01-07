@@ -5,7 +5,7 @@ import vendingmachine.application.controller.adapter.ConsoleInputAdapter;
 import vendingmachine.application.service.VendingMachineService;
 import vendingmachine.application.view.ConsoleInputView;
 import vendingmachine.application.view.ConsoleOutputView;
-import vendingmachine.domain.MachineBalanceRepository;
+import vendingmachine.domain.balance.MachineBalanceRepository;
 import vendingmachine.domain.service.VendingMachine;
 import vendingmachine.domain.strategy.CoinComposeStrategy;
 import vendingmachine.domain.strategy.RandomCoinComposeStrategy;
